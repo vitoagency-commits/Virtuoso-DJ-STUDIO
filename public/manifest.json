@@ -1,0 +1,33 @@
+{
+  "id": "/",
+  "name": "Virtuoso DJ Studio Pro",
+  "short_name": "Virtuoso DJ",
+  "description": "Virtual DJ Studio per Mac, iPad e iPhone con motore DSP audio Web Audio, jog wheel touch, campionatore e funzionamento offline.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0a0c12",
+  "theme_color": "#06b6d4",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": ["music", "entertainment", "utilities"]
+}

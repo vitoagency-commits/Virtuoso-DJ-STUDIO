@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="vinyl" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1e2433"/>
+      <stop offset="45%" stop-color="#0e1118"/>
+      <stop offset="55%" stop-color="#161b26"/>
+      <stop offset="85%" stop-color="#0a0c12"/>
+      <stop offset="100%" stop-color="#1a202c"/>
+    </radialGradient>
+    <linearGradient id="neon" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="50%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#f97316"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background Platter -->
+  <circle cx="256" cy="256" r="248" fill="#080a0f" stroke="#1f2432" stroke-width="8"/>
+  <circle cx="256" cy="256" r="236" fill="url(#vinyl)"/>
+  
+  <!-- Vinyl Grooves -->
+  <circle cx="256" cy="256" r="200" fill="none" stroke="#252c3d" stroke-width="2" opacity="0.6"/>
+  <circle cx="256" cy="256" r="170" fill="none" stroke="#252c3d" stroke-width="2" opacity="0.5"/>
+  <circle cx="256" cy="256" r="140" fill="none" stroke="#252c3d" stroke-width="2" opacity="0.5"/>
+  <circle cx="256" cy="256" r="110" fill="none" stroke="#252c3d" stroke-width="2" opacity="0.4"/>
+
+  <!-- Neon Indicator Ring -->
+  <circle cx="256" cy="256" r="90" fill="#0d111a" stroke="url(#neon)" stroke-width="8"/>
+
+  <!-- Center Label -->
+  <circle cx="256" cy="256" r="82" fill="#111622"/>
+  
+  <!-- DJ Headphones / Waveform Icon Symbol -->
+  <path d="M196 230 C196 170 316 170 316 230" fill="none" stroke="#06b6d4" stroke-width="14" stroke-linecap="round"/>
+  <rect x="180" y="224" width="28" height="50" rx="12" fill="#06b6d4"/>
+  <rect x="304" y="224" width="28" height="50" rx="12" fill="#f97316"/>
+  
+  <!-- Center Spindle -->
+  <circle cx="256" cy="256" r="14" fill="#ffffff" stroke="#0a0c12" stroke-width="4"/>
+</svg>

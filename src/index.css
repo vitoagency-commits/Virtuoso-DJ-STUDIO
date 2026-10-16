@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+/* Touch & iPad optimization rules */
+@layer base {
+  html, body {
+    overscroll-behavior-y: none;
+    -webkit-overflow-scrolling: touch;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+}
+
+/* Prevent accidental iOS tap highlight and context menus on performance buttons */
+button, input[type="range"], .touch-manipulation {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Jog wheel and vinyl touch-action */
+.jog-wheel-touch {
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}

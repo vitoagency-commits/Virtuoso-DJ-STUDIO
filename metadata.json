@@ -1,0 +1,6 @@
+{
+  "name": "Virtuoso DJ Studio",
+  "description": "Professional responsive DJ mixer inspired by VirtualDJ for Mac and iOS with Web Audio DSP, interactive jog wheels, AI Stems isolation, harmonic mixing, and Gemini AI AutoMix.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
