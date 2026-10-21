@@ -732,6 +732,16 @@ export const MacHeader: React.FC<MacHeaderProps> = ({
             <Flame className="w-3.5 h-3.5 text-amber-400" />
           </button>
 
+          {/* Interactive Manual Direct Trigger */}
+          <button
+            onClick={onOpenManual}
+            className="flex items-center gap-1 px-2 py-1 rounded-md bg-[#161a28] hover:bg-[#1e2338] border border-cyan-500/40 text-cyan-300 text-xs font-bold transition shadow-xs active:scale-95 cursor-pointer"
+            title="Apri Manuale Interattivo, Guida Remix & Ottimizzazione iPad/Mac"
+          >
+            <GraduationCap className="w-3.5 h-3.5 text-cyan-400" />
+            <span className="hidden md:inline font-mono text-[11px]">MANUALE</span>
+          </button>
+
           {/* Keyboard Shortcuts Trigger */}
           {onOpenKeyboardShortcuts && (
             <button

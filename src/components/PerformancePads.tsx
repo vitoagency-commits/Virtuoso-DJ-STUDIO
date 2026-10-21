@@ -117,13 +117,13 @@ export const PerformancePads: React.FC<PerformancePadsProps> = ({
 
         {/* 3. AI STEMS MODE (VirtualDJ's Breakthrough Signature Feature) */}
         {deck.activePadMode === 'stems' && (
-          <div className="w-full flex flex-col gap-2">
-            <div className="grid grid-cols-4 gap-2">
+          <div className={`w-full flex flex-col ${isCompact ? 'gap-1' : 'gap-2'}`}>
+            <div className={`grid grid-cols-4 ${isCompact ? 'gap-1' : 'gap-2'}`}>
               {/* Stem: Vocals */}
-              <div className="bg-[#181c28] border border-[#2b3245] rounded-md p-1.5 flex flex-col items-center gap-1">
+              <div className={`bg-[#181c28] border border-[#2b3245] rounded-md ${isCompact ? 'p-1 gap-0.5' : 'p-1.5 gap-1'} flex flex-col items-center`}>
                 <div className="flex items-center justify-between w-full">
-                  <Mic className="w-3.5 h-3.5 text-cyan-400" />
-                  <span className="text-[9px] font-mono text-cyan-300 font-bold">VOCAL</span>
+                  <Mic className={`${isCompact ? 'w-3 h-3' : 'w-3.5 h-3.5'} text-cyan-400`} />
+                  <span className={`${isCompact ? 'text-[8px]' : 'text-[9px]'} font-mono text-cyan-300 font-bold`}>VOCAL</span>
                 </div>
                 <input
                   type="range"
@@ -136,7 +136,7 @@ export const PerformancePads: React.FC<PerformancePadsProps> = ({
                 />
                 <button
                   onClick={() => onStemMuteToggle('vocals')}
-                  className={`w-full py-0.5 text-[9px] font-mono rounded font-bold transition border ${
+                  className={`w-full ${isCompact ? 'py-0.2 text-[8px]' : 'py-0.5 text-[9px]'} font-mono rounded font-bold transition border ${
                     deck.stems.vocalsMuted
                       ? 'bg-red-950/80 border-red-500 text-red-300'
                       : 'bg-cyan-950/70 border-cyan-500/50 text-cyan-300'
@@ -147,10 +147,10 @@ export const PerformancePads: React.FC<PerformancePadsProps> = ({
               </div>
 
               {/* Stem: Melody / Instruments */}
-              <div className="bg-[#181c28] border border-[#2b3245] rounded-md p-1.5 flex flex-col items-center gap-1">
+              <div className={`bg-[#181c28] border border-[#2b3245] rounded-md ${isCompact ? 'p-1 gap-0.5' : 'p-1.5 gap-1'} flex flex-col items-center`}>
                 <div className="flex items-center justify-between w-full">
-                  <Music2 className="w-3.5 h-3.5 text-purple-400" />
-                  <span className="text-[9px] font-mono text-purple-300 font-bold">MELODY</span>
+                  <Music2 className={`${isCompact ? 'w-3 h-3' : 'w-3.5 h-3.5'} text-purple-400`} />
+                  <span className={`${isCompact ? 'text-[8px]' : 'text-[9px]'} font-mono text-purple-300 font-bold`}>MELODY</span>
                 </div>
                 <input
                   type="range"
@@ -163,7 +163,7 @@ export const PerformancePads: React.FC<PerformancePadsProps> = ({
                 />
                 <button
                   onClick={() => onStemMuteToggle('melody')}
-                  className={`w-full py-0.5 text-[9px] font-mono rounded font-bold transition border ${
+                  className={`w-full ${isCompact ? 'py-0.2 text-[8px]' : 'py-0.5 text-[9px]'} font-mono rounded font-bold transition border ${
                     deck.stems.melodyMuted
                       ? 'bg-red-950/80 border-red-500 text-red-300'
                       : 'bg-purple-950/70 border-purple-500/50 text-purple-300'
@@ -174,10 +174,10 @@ export const PerformancePads: React.FC<PerformancePadsProps> = ({
               </div>
 
               {/* Stem: Bass */}
-              <div className="bg-[#181c28] border border-[#2b3245] rounded-md p-1.5 flex flex-col items-center gap-1">
+              <div className={`bg-[#181c28] border border-[#2b3245] rounded-md ${isCompact ? 'p-1 gap-0.5' : 'p-1.5 gap-1'} flex flex-col items-center`}>
                 <div className="flex items-center justify-between w-full">
-                  <Disc3 className="w-3.5 h-3.5 text-amber-400" />
-                  <span className="text-[9px] font-mono text-amber-300 font-bold">BASS</span>
+                  <Disc3 className={`${isCompact ? 'w-3 h-3' : 'w-3.5 h-3.5'} text-amber-400`} />
+                  <span className={`${isCompact ? 'text-[8px]' : 'text-[9px]'} font-mono text-amber-300 font-bold`}>BASS</span>
                 </div>
                 <input
                   type="range"
@@ -190,7 +190,7 @@ export const PerformancePads: React.FC<PerformancePadsProps> = ({
                 />
                 <button
                   onClick={() => onStemMuteToggle('bass')}
-                  className={`w-full py-0.5 text-[9px] font-mono rounded font-bold transition border ${
+                  className={`w-full ${isCompact ? 'py-0.2 text-[8px]' : 'py-0.5 text-[9px]'} font-mono rounded font-bold transition border ${
                     deck.stems.bassMuted
                       ? 'bg-red-950/80 border-red-500 text-red-300'
                       : 'bg-amber-950/70 border-amber-500/50 text-amber-300'
@@ -201,10 +201,10 @@ export const PerformancePads: React.FC<PerformancePadsProps> = ({
               </div>
 
               {/* Stem: Drums */}
-              <div className="bg-[#181c28] border border-[#2b3245] rounded-md p-1.5 flex flex-col items-center gap-1">
+              <div className={`bg-[#181c28] border border-[#2b3245] rounded-md ${isCompact ? 'p-1 gap-0.5' : 'p-1.5 gap-1'} flex flex-col items-center`}>
                 <div className="flex items-center justify-between w-full">
-                  <Drum className="w-3.5 h-3.5 text-rose-400" />
-                  <span className="text-[9px] font-mono text-rose-300 font-bold">DRUMS</span>
+                  <Drum className={`${isCompact ? 'w-3 h-3' : 'w-3.5 h-3.5'} text-rose-400`} />
+                  <span className={`${isCompact ? 'text-[8px]' : 'text-[9px]'} font-mono text-rose-300 font-bold`}>DRUMS</span>
                 </div>
                 <input
                   type="range"
@@ -217,7 +217,7 @@ export const PerformancePads: React.FC<PerformancePadsProps> = ({
                 />
                 <button
                   onClick={() => onStemMuteToggle('drums')}
-                  className={`w-full py-0.5 text-[9px] font-mono rounded font-bold transition border ${
+                  className={`w-full ${isCompact ? 'py-0.2 text-[8px]' : 'py-0.5 text-[9px]'} font-mono rounded font-bold transition border ${
                     deck.stems.drumsMuted
                       ? 'bg-red-950/80 border-red-500 text-red-300'
                       : 'bg-rose-950/70 border-rose-500/50 text-rose-300'
@@ -229,7 +229,7 @@ export const PerformancePads: React.FC<PerformancePadsProps> = ({
             </div>
 
             {/* Quick Stem Combos */}
-            <div className="flex items-center justify-between gap-1 text-[9px] font-mono">
+            <div className={`flex items-center justify-between gap-1 ${isCompact ? 'text-[8px]' : 'text-[9px]'} font-mono`}>
               <button
                 onClick={() => {
                   onStemVolumeChange('vocals', 1);
@@ -237,9 +237,9 @@ export const PerformancePads: React.FC<PerformancePadsProps> = ({
                   onStemVolumeChange('bass', 0);
                   onStemVolumeChange('drums', 0);
                 }}
-                className="flex-1 py-1 rounded bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-slate-700 active:scale-95"
+                className={`flex-1 ${isCompact ? 'py-0.5' : 'py-1'} rounded bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-slate-700 active:scale-95`}
               >
-                SOLO ACAPELLA
+                SOLO VOCAL
               </button>
               <button
                 onClick={() => {
@@ -248,9 +248,9 @@ export const PerformancePads: React.FC<PerformancePadsProps> = ({
                   onStemVolumeChange('bass', 1);
                   onStemVolumeChange('drums', 1);
                 }}
-                className="flex-1 py-1 rounded bg-slate-800 hover:bg-slate-700 text-amber-300 border border-slate-700 active:scale-95"
+                className={`flex-1 ${isCompact ? 'py-0.5' : 'py-1'} rounded bg-slate-800 hover:bg-slate-700 text-amber-300 border border-slate-700 active:scale-95`}
               >
-                SOLO INSTRUMENTAL
+                SOLO INST
               </button>
               <button
                 onClick={() => {
@@ -259,9 +259,9 @@ export const PerformancePads: React.FC<PerformancePadsProps> = ({
                   onStemVolumeChange('bass', 1);
                   onStemVolumeChange('drums', 1);
                 }}
-                className="flex-1 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 active:scale-95"
+                className={`flex-1 ${isCompact ? 'py-0.5' : 'py-1'} rounded bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 active:scale-95`}
               >
-                RESET ALL STEMS
+                RESET STEMS
               </button>
             </div>
           </div>

@@ -213,7 +213,10 @@ export default function App() {
   });
 
   // Dynamic minimalist check for iPad 13" and MacBook Pro 13"-16"
-  const isMinimalist = layout === 'ios-touch' || isTouchDevice || (typeof window !== 'undefined' && (window.innerWidth <= 1280 || window.innerHeight <= 850));
+  const isMinimalist =
+    layout === 'ios-touch' ||
+    isTouchDevice ||
+    (typeof window !== 'undefined' && (window.innerWidth <= 1366 || window.innerHeight <= 850));
 
   useEffect(() => {
     try {
@@ -317,29 +320,78 @@ export default function App() {
     window.addEventListener('mouseup', onMouseUp);
   };
 
+  const handleWaveformSplitterTouchStart = (e: React.TouchEvent) => {
+    if (!e.touches[0]) return;
+    setActiveSplitter('waveform-height');
+    const startY = e.touches[0].clientY;
+    const startH = panelDimensions.waveformHeight;
+
+    const onTouchMove = (moveEvt: TouchEvent) => {
+      if (!moveEvt.touches[0]) return;
+      const deltaY = moveEvt.touches[0].clientY - startY;
+      const newH = Math.max(55, Math.min(180, Math.round(startH + deltaY)));
+      setPanelDimensions((prev) => ({ ...prev, waveformHeight: newH }));
+    };
+
+    const onTouchEnd = () => {
+      setActiveSplitter(null);
+      window.removeEventListener('touchmove', onTouchMove);
+      window.removeEventListener('touchend', onTouchEnd);
+    };
+
+    window.addEventListener('touchmove', onTouchMove);
+    window.addEventListener('touchend', onTouchEnd);
+  };
+
+  const handleMixerSplitterTouchStart = (e: React.TouchEvent, side: 'left' | 'right') => {
+    if (!e.touches[0]) return;
+    setActiveSplitter(side === 'left' ? 'mixer-left' : 'mixer-right');
+    const startX = e.touches[0].clientX;
+    const startW = panelDimensions.mixerWidth;
+
+    const onTouchMove = (moveEvt: TouchEvent) => {
+      if (!moveEvt.touches[0]) return;
+      const deltaX = moveEvt.touches[0].clientX - startX;
+      const adjustedDelta = side === 'right' ? deltaX : -deltaX;
+      const newW = Math.max(160, Math.min(380, Math.round(startW + adjustedDelta)));
+      setPanelDimensions((prev) => ({ ...prev, mixerWidth: newW }));
+    };
+
+    const onTouchEnd = () => {
+      setActiveSplitter(null);
+      window.removeEventListener('touchmove', onTouchMove);
+      window.removeEventListener('touchend', onTouchEnd);
+    };
+
+    window.addEventListener('touchmove', onTouchMove);
+    window.addEventListener('touchend', onTouchEnd);
+  };
+
   const handleResetSplitter = (type: 'browser-height' | 'waveform-height' | 'mixer-width') => {
+    const isSmallScreen = isMinimalist || (typeof window !== 'undefined' && (window.innerWidth <= 1366 || window.innerHeight <= 850));
     if (type === 'browser-height') {
-      setPanelDimensions((prev) => ({ ...prev, browserHeight: 280 }));
+      setPanelDimensions((prev) => ({ ...prev, browserHeight: isSmallScreen ? 125 : 180 }));
     } else if (type === 'waveform-height') {
-      setPanelDimensions((prev) => ({ ...prev, waveformHeight: 135 }));
+      setPanelDimensions((prev) => ({ ...prev, waveformHeight: isSmallScreen ? 68 : 85 }));
     } else if (type === 'mixer-width') {
-      setPanelDimensions((prev) => ({ ...prev, mixerWidth: 240 }));
+      setPanelDimensions((prev) => ({ ...prev, mixerWidth: isSmallScreen ? 195 : 210 }));
     }
   };
 
   const handleResetDefaultDimensions = () => {
+    const isSmallScreen = isMinimalist || (typeof window !== 'undefined' && (window.innerWidth <= 1366 || window.innerHeight <= 850));
     const defaultDims = {
-      browserHeight: 175,
-      waveformHeight: 85,
-      mixerWidth: 210,
-      browserSidebarWidth: 180,
+      browserHeight: isSmallScreen ? 125 : 175,
+      waveformHeight: isSmallScreen ? 68 : 85,
+      mixerWidth: isSmallScreen ? 195 : 210,
+      browserSidebarWidth: isSmallScreen ? 160 : 180,
     };
     setPanelDimensions(defaultDims);
     setShowWaveforms(true);
     setShowCenterMixer(true);
-    setShowAdvisor(true);
+    setShowAdvisor(!isSmallScreen);
     setBrowserViewMode('standard');
-    const defaultPlatter: PlatterSize = 'standard';
+    const defaultPlatter: PlatterSize = isSmallScreen ? 'compact' : 'standard';
     setPlatterSize(defaultPlatter);
     try {
       localStorage.setItem('virtuoso_panel_dimensions_v2', JSON.stringify(defaultDims));
@@ -599,8 +651,10 @@ export default function App() {
     const checkTouch = () => {
       const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
       setIsTouchDevice(hasTouch);
-      // Auto-adapt default layout to 'ios-touch' if running on iPad / tablet and in touch mode
-      if (hasTouch && window.innerWidth <= 1024) {
+      const isIpadOrTablet =
+        (hasTouch && (window.innerWidth <= 1366 || window.innerHeight <= 1024)) ||
+        (/iPad|Macintosh/i.test(navigator.userAgent) && navigator.maxTouchPoints > 0 && window.innerWidth <= 1366);
+      if (isIpadOrTablet) {
         setLayout((curr) => (curr === 'mac-quad' ? 'mac-quad' : 'ios-touch'));
       }
     };
@@ -1761,6 +1815,9 @@ export default function App() {
     } else if (exerciseId === 'audio_hardware_guide') {
       setShowHardwareModal(true);
       setExerciseNotification('🎛️ Matrice Audio Hardware Aperta! Assegna Ch 1-2 al Master e Ch 3-4 alle Cuffie (PFL)!');
+    } else if (exerciseId === 'minimalist_preset_apply') {
+      handleApplyLayoutPreset('minimalist-device');
+      setExerciseNotification('📱 MODALITÀ MINIMALISTA ATTIVA: Proporzioni calcolate al millimetro per iPad e MacBook 13"-16" senza elementi tagliati!');
     }
 
     setTimeout(() => {
@@ -1825,6 +1882,7 @@ export default function App() {
             orientation="horizontal"
             isDragging={activeSplitter === 'waveform-height'}
             onMouseDown={handleWaveformSplitterMouseDown}
+            onTouchStart={handleWaveformSplitterTouchStart}
             onDoubleClick={() => handleResetSplitter('waveform-height')}
             onReset={() => handleResetSplitter('waveform-height')}
             label="Trascina in verticale per l'altezza delle Waveform • Doppio click per default (135px)"
@@ -2199,6 +2257,7 @@ export default function App() {
               orientation="vertical"
               isDragging={activeSplitter === 'mixer-left'}
               onMouseDown={(e) => handleMixerSplitterMouseDown(e, 'left')}
+              onTouchStart={(e) => handleMixerSplitterTouchStart(e, 'left')}
               onDoubleClick={() => handleResetSplitter('mixer-width')}
               onReset={() => handleResetSplitter('mixer-width')}
               label="Trascina in orizzontale per ridimensionare il Mixer • Doppio click per default (210px)"
@@ -2258,6 +2317,7 @@ export default function App() {
               orientation="vertical"
               isDragging={activeSplitter === 'mixer-right'}
               onMouseDown={(e) => handleMixerSplitterMouseDown(e, 'right')}
+              onTouchStart={(e) => handleMixerSplitterTouchStart(e, 'right')}
               onDoubleClick={() => handleResetSplitter('mixer-width')}
               onReset={() => handleResetSplitter('mixer-width')}
               label="Trascina in orizzontale per ridimensionare il Mixer • Doppio click per default (210px)"

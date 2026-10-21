@@ -17,6 +17,7 @@ import {
   Keyboard,
   Smartphone,
   Laptop,
+  Tablet,
   Music,
   Zap,
   Target,
@@ -39,6 +40,7 @@ interface InteractiveDjManualModalProps {
 
 type TabType =
   | 'remix_points'
+  | 'ipad_mac_device'
   | 'audio_routing'
   | 'quantize_beatgrid'
   | 'web_midi'
@@ -524,10 +526,10 @@ export const InteractiveDjManualModal: React.FC<InteractiveDjManualModalProps> =
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 bg-black/85 backdrop-blur-xs select-none">
-      <div className="bg-[#12151f] border border-[#2b3347] rounded-xl w-full max-w-5xl max-h-[92vh] flex flex-col shadow-2xl overflow-hidden text-slate-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-3 bg-black/85 backdrop-blur-xs select-none">
+      <div className="bg-[#12151f] border border-[#2b3347] rounded-xl w-full max-w-5xl max-h-[calc(100dvh-1.5rem)] flex flex-col shadow-2xl overflow-hidden text-slate-200">
         {/* Header */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-[#212739] bg-[#161a28]">
+        <div className="flex items-center justify-between px-3 sm:px-4 py-2.5 sm:py-3 border-b border-[#212739] bg-[#161a28]">
           <div className="flex items-center gap-2">
             <div className="p-1.5 rounded-lg bg-cyan-950/80 border border-cyan-500/40 text-cyan-400">
               <GraduationCap className="w-5 h-5 animate-pulse" />
@@ -536,11 +538,11 @@ export const InteractiveDjManualModal: React.FC<InteractiveDjManualModalProps> =
               <h2 className="text-sm sm:text-base font-bold text-white tracking-wide flex items-center gap-2">
                 <span>MANUALE INTERATTIVO &amp; VIRTUOSO DJ ACADEMY</span>
                 <span className="text-[10px] px-2 py-0.5 rounded font-mono bg-cyan-950 border border-cyan-500/60 text-cyan-300">
-                  VERSIONE PRO CLUB
+                  PRO CLUB &amp; IPAD
                 </span>
               </h2>
               <p className="text-[11px] text-slate-400">
-                Guida completa a Remix Point, Audio Routing Ch 3-4, Quantize Magnetico, Web MIDI e Mixaggio
+                Guida a Remix Point, iPad 13" Minimalist, Audio Routing Ch 3-4, Quantize Magnetico e Web MIDI
               </p>
             </div>
           </div>
@@ -556,6 +558,7 @@ export const InteractiveDjManualModal: React.FC<InteractiveDjManualModalProps> =
         <div className="flex border-b border-[#212739] bg-[#0e111a] px-3 gap-1 overflow-x-auto text-xs scrollbar-none">
           {[
             { id: 'remix_points', label: '⚡ Il Punto Esatto di Remix', icon: Target },
+            { id: 'ipad_mac_device', label: '📱 Guida iPad & Mac 13"-16"', icon: Tablet },
             { id: 'audio_routing', label: '🎧 Audio Routing Cuffie Ch 3-4', icon: Headphones },
             { id: 'quantize_beatgrid', label: '🧲 Quantize & Beatgrid', icon: Zap },
             { id: 'web_midi', label: '🎹 Controller Web MIDI', icon: Sliders },
@@ -731,6 +734,228 @@ export const InteractiveDjManualModal: React.FC<InteractiveDjManualModalProps> =
                     <Play className="w-3.5 h-3.5 fill-current" />
                     <span>{currentScenario.exerciseButtonText}</span>
                   </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* TAB: IPAD & MACBOOK PRO 13"-16" MINIMALIST DEVICE GUIDE */}
+          {activeTab === 'ipad_mac_device' && (
+            <div className="space-y-4">
+              {/* Banner Principale Risoluzione Problemi e Minimalismo */}
+              <div className="bg-gradient-to-r from-cyan-950/80 via-[#131929] to-blue-950/80 border-2 border-cyan-500/50 rounded-xl p-4 shadow-xl">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-cyan-500/30 pb-3">
+                  <div className="flex items-center gap-2.5">
+                    <div className="p-2 rounded-lg bg-cyan-500/20 border border-cyan-400 text-cyan-300">
+                      <Tablet className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs sm:text-sm font-bold text-white tracking-wide">
+                          GUIDA TECNICA DISPOSITIVI: IPAD 13" &amp; MACBOOK PRO 13"-16"
+                        </span>
+                        <span className="text-[9px] px-2 py-0.5 rounded-full font-mono bg-cyan-400 text-slate-950 font-black">
+                          ZERO OVERFLOW
+                        </span>
+                      </div>
+                      <p className="text-[11px] text-cyan-200/90 mt-0.5">
+                        Interfaccia minimalista, proporzioni perfette, nessun riquadro tagliato o scroll forzato
+                      </p>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() => {
+                      if (onRunInteractiveExercise) {
+                        onRunInteractiveExercise('minimalist_preset_apply');
+                      }
+                      audioEngine.triggerSamplerSound('laser', 0.5);
+                      onClose();
+                    }}
+                    className="px-3.5 py-1.5 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-mono font-bold text-xs transition active:scale-95 shadow-md flex items-center justify-center gap-1.5 cursor-pointer shrink-0"
+                  >
+                    <Tablet className="w-3.5 h-3.5" />
+                    <span>APPLICA PRESET MINIMALISTA ORA</span>
+                  </button>
+                </div>
+
+                <div className="mt-3 text-xs text-slate-300 leading-relaxed space-y-2">
+                  <p>
+                    Negli schermi portatili con altezza contenuta — come <strong>iPad Pro 12.9" / 13"</strong> e <strong>MacBook Pro da 13" a 16"</strong> —
+                    l'interfaccia classica da studio rischiava di comprimere i moduli, facendo apparire alcuni riquadri parzialmente visibili o tagliati.
+                  </p>
+                  <p className="text-cyan-300/90">
+                    Abbiamo riprogettato chirurgicamente l'architettura dei deck e del mixer introducendo la <strong>Modalità Minimalista</strong> e il pieno supporto alle unità di viewport dinamiche <code>100dvh</code> di Safari iOS, garantendo che <strong>tutti i moduli siano visibili al 100%</strong> senza barre di scorrimento interne.
+                  </p>
+                </div>
+              </div>
+
+              {/* GRIGLIA FUNZIONALITA CHIRURGICHE */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {/* 1. Gestione Piatti Jog Wheel: MINI vs NORM vs IPAD */}
+                <div className="bg-[#151926] border border-[#262f43] rounded-lg p-3.5 space-y-2.5">
+                  <div className="flex items-center justify-between border-b border-[#212738] pb-1.5">
+                    <span className="text-xs font-bold text-cyan-300 flex items-center gap-1.5">
+                      <Disc3 className="w-4 h-4 text-cyan-400" />
+                      1. Dimensioni Piatto (MINI vs NORM vs IPAD)
+                    </span>
+                    <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-500/40 font-bold">
+                      PIATTO JOG
+                    </span>
+                  </div>
+
+                  <p className="text-[11px] text-slate-300">
+                    Sulla parte superiore di ogni Jog Wheel trovi il selettore istantaneo di dimensione:
+                  </p>
+
+                  <div className="space-y-1.5 text-[11px]">
+                    <div className="p-2 rounded bg-[#0d0f17] border border-emerald-500/30">
+                      <strong className="text-emerald-400 font-mono">MINI (120-135px) • CONSIGLIATO:</strong>
+                      <span className="text-slate-300 ml-1">
+                        Riduce il diametro del vinile per regalare spazio verticale completo ai fader del volume, pitch tempo e agli 8 pad (Hot Cue, Loop, Stems).
+                      </span>
+                    </div>
+                    <div className="p-2 rounded bg-[#0d0f17] border border-slate-700">
+                      <strong className="text-slate-300 font-mono">NORM (170px):</strong>
+                      <span className="text-slate-400 ml-1">
+                        Dimensione bilanciata per MacBook Pro 15"-16" o monitor esterni HDMI/Thunderbolt.
+                      </span>
+                    </div>
+                    <div className="p-2 rounded bg-[#0d0f17] border border-cyan-500/30">
+                      <strong className="text-cyan-400 font-mono">IPAD (220px):</strong>
+                      <span className="text-slate-300 ml-1">
+                        Piatto extra-large per scratch avanzato con le dita su schermi touch grandi.
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 2. Gesti Multitouch & Precisione Touch iPad */}
+                <div className="bg-[#151926] border border-[#262f43] rounded-lg p-3.5 space-y-2.5">
+                  <div className="flex items-center justify-between border-b border-[#212738] pb-1.5">
+                    <span className="text-xs font-bold text-amber-300 flex items-center gap-1.5">
+                      <Zap className="w-4 h-4 text-amber-400" />
+                      2. Gesti Multitouch a 60fps &amp; Safari
+                    </span>
+                    <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-500/40 font-bold">
+                      TOUCH ENGINE
+                    </span>
+                  </div>
+
+                  <div className="space-y-1.5 text-[11px] text-slate-300">
+                    <div className="flex items-start gap-2">
+                      <span className="font-mono text-cyan-400 font-bold shrink-0">✦</span>
+                      <span>
+                        <strong>Scratch a 1 o 2 dita:</strong> tocca il piatto circolare in modalità VINYL e muovi la mano avanti e indietro. Safari non scatterà né farà scroll della pagina (protezione <code>preventDefault</code> attiva).
+                      </span>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="font-mono text-cyan-400 font-bold shrink-0">✦</span>
+                      <span>
+                        <strong>Pitch Bend Nudge:</strong> tocca i tasti <code>+</code> e <code>-</code> per dare piccole accelerazioni o rallentamenti di frazioni di secondo e centrare il rullante sul beat.
+                      </span>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="font-mono text-cyan-400 font-bold shrink-0">✦</span>
+                      <span>
+                        <strong>Splitter Touch:</strong> puoi trascinare con il dito le barre di separazione tra waveform, mixer e browser libreria per personalizzare i volumi in qualunque momento.
+                      </span>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="font-mono text-cyan-400 font-bold shrink-0">✦</span>
+                      <span>
+                        <strong>Pad Antilatenza:</strong> i bottoni Hot Cue e Sampler sono ottimizzati per reattività istantanea al tocco (meno di 4 millisecondi tramite Web Audio API).
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 3. Audio Routing Ch 3-4 e Cuffie su iPadOS */}
+                <div className="bg-[#151926] border border-[#262f43] rounded-lg p-3.5 space-y-2.5">
+                  <div className="flex items-center justify-between border-b border-[#212738] pb-1.5">
+                    <span className="text-xs font-bold text-purple-300 flex items-center gap-1.5">
+                      <Headphones className="w-4 h-4 text-purple-400" />
+                      3. Cuffie e Preascolto PFL su iPad
+                    </span>
+                    <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-500/40 font-bold">
+                      USB-C AUDIO
+                    </span>
+                  </div>
+
+                  <p className="text-[11px] text-slate-300">
+                    iPad supporta l'uscita audio multicanale sia via cavo che via interfaccia audio USB-C:
+                  </p>
+
+                  <ul className="space-y-1.5 text-[11px] text-slate-300">
+                    <li className="bg-[#0e111a] p-2 rounded border border-[#222739]">
+                      <strong className="text-purple-300">Opzione A (Scheda USB-C 4 Canali):</strong> Collega qualsiasi scheda (Pioneer DDJ, Traktor, Focusrite o hub USB-C). Clicca su <strong>AUDIO CH 1-4</strong> per assegnare Canali 1-2 al Master e Canali 3-4 alle Cuffie.
+                    </li>
+                    <li className="bg-[#0e111a] p-2 rounded border border-[#222739]">
+                      <strong className="text-amber-300">Opzione B (Split Cue senza scheda):</strong> Attiva il pulsante <strong>SPLIT CUE</strong> sul mixer. Il canale sinistro suonerà il Pre-ascolto CUE in cuffia, il canale destro suonerà il Master.
+                    </li>
+                  </ul>
+                </div>
+
+                {/* 4. Magic Keyboard & Scorciatoie Mac/iPad */}
+                <div className="bg-[#151926] border border-[#262f43] rounded-lg p-3.5 space-y-2.5">
+                  <div className="flex items-center justify-between border-b border-[#212738] pb-1.5">
+                    <span className="text-xs font-bold text-emerald-300 flex items-center gap-1.5">
+                      <Keyboard className="w-4 h-4 text-emerald-400" />
+                      4. Tasti Rapidi con Magic Keyboard o Mac
+                    </span>
+                    <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-500/40 font-bold">
+                      HARDWARE KEYS
+                    </span>
+                  </div>
+
+                  <p className="text-[11px] text-slate-300">
+                    Se usi una Magic Keyboard su iPad o la tastiera del MacBook, hai il controllo totale senza toccare lo schermo:
+                  </p>
+
+                  <div className="grid grid-cols-2 gap-1.5 text-[10px] font-mono">
+                    <div className="bg-[#0e111a] p-1.5 rounded border border-[#222739] flex items-center justify-between">
+                      <span className="text-slate-400">Play / Pausa:</span>
+                      <kbd className="px-1.5 py-0.5 rounded bg-slate-800 text-emerald-300 border border-slate-700">SPACE</kbd>
+                    </div>
+                    <div className="bg-[#0e111a] p-1.5 rounded border border-[#222739] flex items-center justify-between">
+                      <span className="text-slate-400">Cue Stutter:</span>
+                      <kbd className="px-1.5 py-0.5 rounded bg-slate-800 text-amber-300 border border-slate-700">C</kbd>
+                    </div>
+                    <div className="bg-[#0e111a] p-1.5 rounded border border-[#222739] flex items-center justify-between">
+                      <span className="text-slate-400">Sync Beatgrid:</span>
+                      <kbd className="px-1.5 py-0.5 rounded bg-slate-800 text-cyan-300 border border-slate-700">S</kbd>
+                    </div>
+                    <div className="bg-[#0e111a] p-1.5 rounded border border-[#222739] flex items-center justify-between">
+                      <span className="text-slate-400">Max Libreria:</span>
+                      <kbd className="px-1.5 py-0.5 rounded bg-slate-800 text-purple-300 border border-slate-700">B</kbd>
+                    </div>
+                    <div className="bg-[#0e111a] p-1.5 rounded border border-[#222739] flex items-center justify-between">
+                      <span className="text-slate-400">Toggle Mixer:</span>
+                      <kbd className="px-1.5 py-0.5 rounded bg-slate-800 text-rose-300 border border-slate-700">M</kbd>
+                    </div>
+                    <div className="bg-[#0e111a] p-1.5 rounded border border-[#222739] flex items-center justify-between">
+                      <span className="text-slate-400">Toggle Waveform:</span>
+                      <kbd className="px-1.5 py-0.5 rounded bg-slate-800 text-blue-300 border border-slate-700">W</kbd>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Box installazione PWA a schermo intero */}
+              <div className="bg-[#121724] border border-[#232b3d] rounded-lg p-3.5 flex flex-col sm:flex-row items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 rounded-lg bg-blue-950/70 border border-blue-500/40 text-blue-400 shrink-0">
+                    <Smartphone className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold text-white">
+                      Consiglio Pro iPad: Aggiungi alla Schermata Home (Modalità PWA)
+                    </h4>
+                    <p className="text-[11px] text-slate-300 mt-0.5">
+                      Apri la pagina in Safari, tocca il tasto <strong>Condividi</strong> e seleziona <strong>"Aggiungi a Schermata Home"</strong>.
+                      L'app si aprirà a schermo intero come un'applicazione nativa per iPad senza barre degli indirizzi, guadagnando 80px di visibilità verticale!
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
